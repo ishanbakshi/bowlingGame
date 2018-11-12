@@ -110,7 +110,7 @@ describe('Test BowlingGame', () => {
     bowlingGame.roll(1);
     bowlingGame.roll(10);
     bowlingGame.roll(10);
-    expect(bowlingGame.score()).toBe(23);
+    expect(bowlingGame.score()).toBe(109);
   });
 
 });

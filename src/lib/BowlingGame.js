@@ -38,8 +38,6 @@ class BowlingGame {
       }else{
         score += this.frames[i+1].calculateFrameTotal();
       }
-      console.log('roll no : '+ i);
-      console.log(score);
     }
    
     return score;

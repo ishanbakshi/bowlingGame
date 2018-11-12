@@ -4,16 +4,31 @@ class Frame {
 
   constructor() {
     this.rollOne;
-    this.rollTwo
+    this.rollTwo;
+  }
+
+  getRollOne(){
+    return this.rollOne;
+  }
+  /**
+   * Returns true if the frame is complete
+   * so that the game can move to the next frame.
+   */
+  isFrameComplete(){
+    if(this.isStrike()
+     ||  ((this.rollOne || this.rollOne==0) 
+     && (this.rollTwo || this.rollTwo==0))){
+      return true;
+    }
+    return false; 
   }
 
   roll(noOfPins){
-    if(!this.rollOne){
+    if(!this.rollOne && this.rollOne!=0){
       this.rollOne = noOfPins
     }else{
       this.rollTwo = noOfPins
     }
-
   }
   isStrike(){
     return (this.rollOne) === MAX_FRAME_SCORE ? true : false;
@@ -26,8 +41,29 @@ class Frame {
       )? true : false;
   }
 
+  /**
+   * Call this if the previous frame was neither a strike, nor a spare
+   */
   calculateFrameTotal(){
-    return this.rollOne + this.rollTwo;
+    if(this.rollTwo){
+      return this.rollOne + this.rollTwo;
+    }else{
+      return this.rollOne;
+    }
+  }
+
+  /**
+   * Call this if the previous frame was a spare
+   */
+  calculateSpareTotal(){
+    return this.calculateFrameTotal() + this.rollOne;
+  }
+
+  /**
+   * Call this if the previous frame was a Strike
+   */
+  calculateStrikeTotal(){
+    return this.calculateFrameTotal() * 2 ;
   }
 }
 

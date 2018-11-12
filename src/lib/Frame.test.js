@@ -11,8 +11,8 @@ describe('Test Frames', () => {
     });
     it('check if frame is not a Strike', () => {
       let nonStrikeFrame = new Frame();
-      nonStrikeFrame.roll(2);
-      nonStrikeFrame.roll(5);
+      nonStrikeFrame.roll(9);
+      nonStrikeFrame.roll(1);
       expect(nonStrikeFrame.isStrike()).toBe(false);
     });
   });
@@ -35,13 +35,38 @@ describe('Test Frames', () => {
     });
   });
 
-  // describe('calculateFrameTotal', () => {
-  //   it('test frame total is calculated', () => {
-  //     const spareFrame = new Frame([3,5]);
-  //     expect(spareFrame.calculateFrameTotal()).toBe(8);
-  //   });
-   
-  // });
+  describe('isFrameComplete', () => {
+    it('check if frame is complete', () => {
+      let frameOne = new Frame();
+      frameOne.roll(0);
+      frameOne.roll(4);
+      expect(frameOne.isFrameComplete()).toBe(true);
+      let frameTwo = new Frame();
+      frameTwo.roll(10);
+      expect(frameTwo.isFrameComplete()).toBe(true);
+    });
+  });
+
+  describe('calculateFrameTotal', () => {
+    it('test frame total', () => {
+      let frameObj = new Frame();
+      frameObj.roll(2);
+      frameObj.roll(4);
+      expect(frameObj.calculateFrameTotal()).toBe(6);
+    });
+    it('test frame total when previous frame was a spare', () => {
+      let frameObj = new Frame();
+      frameObj.roll(2);
+      frameObj.roll(4);
+      expect(frameObj.calculateSpareTotal()).toBe(8);
+    });
+    it('test frame total when previous frame was a strike', () => {
+      let frameObj = new Frame();
+      frameObj.roll(2);
+      frameObj.roll(4);
+      expect(frameObj.calculateStrikeTotal()).toBe(12);
+    });
+  });
   
 });
 

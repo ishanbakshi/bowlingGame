@@ -18,19 +18,27 @@ class BowlingGame {
   }
 
   score(){
-    let score =0;
-    for(let i=0; i<this.frames.length; i++){
-      if(this.frames[i-1] && this.frames[i-1].isSpare()){
-        score += this.frames[i].calculateSpareTotal();
-      }else if(this.frames[i-1] && this.frames[i-1].isStrike()){
-        score += this.frames[i].calculateStrikeTotal();
-        if(this.frames[i].isStrike() && this.frames[i+1]){
+    let score = 0;
+    let onAStrikeInARow=false;
+    if(this.frames[0]){
+      score =this.frames[0].calculateFrameTotal();
+    }
+    for(let i=0; i<this.frames.length-1; i++){
+      if(this.frames[i].isSpare()){
+        score += this.frames[i+1].calculateSpareTotal();
+      }else if(this.frames[i].isStrike()){
+        score += this.frames[i+1].calculateStrikeTotal();
+        if(onAStrikeInARow){
           score += this.frames[i+1].rollOne;
+          onAStrikeInARow=false;
+        }
+        if(this.frames[i+1].isStrike()){
+          onAStrikeInARow = true;
         }
       }else{
-        score += this.frames[i].calculateFrameTotal();
+        score += this.frames[i+1].calculateFrameTotal();
       }
-      console.log('for frame number '+ i);
+      console.log('roll no : '+ i);
       console.log(score);
     }
    

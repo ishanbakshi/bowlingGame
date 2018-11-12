@@ -7,9 +7,6 @@ class Frame {
     this.rollTwo;
   }
 
-  getRollOne(){
-    return this.rollOne;
-  }
   /**
    * Returns true if the frame is complete
    * so that the game can move to the next frame.

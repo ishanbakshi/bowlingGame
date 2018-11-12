@@ -1,0 +1,12 @@
+{
+  "name": "diusbowlinggame",
+  "version": "1.0.0",
+  "description": "bowling game for dius coding test",
+  "main": "start.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node start.js"
+  },
+  "author": "Ishan Bakshi",
+  "license": "ISC"
+}
